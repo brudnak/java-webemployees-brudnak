@@ -2,6 +2,8 @@ package com.lambdaschool.webemployees;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,5 +17,13 @@ public class EmployeeController {
     public ResponseEntity<?> getAllEmployees() {
         WebemployeesApplication.ourEmpList.empList.sort((e1, e2) -> e1.getLname().compareToIgnoreCase(e2.getLname()));
         return new ResponseEntity<>(WebemployeesApplication.ourEmpList.empList, HttpStatus.OK);
+    }
+
+    // localhost:2019/data/employee/2
+    @GetMapping(value = "/employee/{id}",
+                produces = {"application/json"})
+    public ResponseEntity<?> gemEmpDetail(@PathVariable long id) {
+        Employee rtnEmp = WebemployeesApplication.ourEmpList.findEmployee(e -> (e.getId() == id));
+        return new ResponseEntity<>(rtnEmp, HttpStatus.OK);
     }
 }
