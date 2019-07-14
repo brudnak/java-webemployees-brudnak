@@ -31,6 +31,18 @@ public class Employee {
         this.healthPlanID = healthPlanID;
     }
 
+    // cloned constructor
+    public Employee(Employee toClone) {
+
+        this.id = toClone.getId();
+        this.fname = toClone.getFname();
+        this.lname = toClone.getLname();
+        this.salary = toClone.getSalary();
+        this.has401k = toClone.isHas401k();
+        this.companyID = toClone.getCompanyID();
+        this.healthPlanID = toClone.getHealthPlanID();
+    }
+
     // *********************************
     // start of - GETTERS & SETTERS
     public long getId() {
