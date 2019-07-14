@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+
 @RestController
 @RequestMapping("/data")
 public class EmployeeController {
@@ -25,5 +27,16 @@ public class EmployeeController {
     public ResponseEntity<?> gemEmpDetail(@PathVariable long id) {
         Employee rtnEmp = WebemployeesApplication.ourEmpList.findEmployee(e -> (e.getId() == id));
         return new ResponseEntity<>(rtnEmp, HttpStatus.OK);
+    }
+
+    // localhost:2019/data/employees/s
+    @GetMapping(value = "/employees/{letter}",
+                produces = {"application/json"})
+    public ResponseEntity<?> getEmployees(
+            @PathVariable
+                    char letter) {
+        ArrayList<Employee> rtnEmps = WebemployeesApplication.ourEmpList.
+                findEmployees(e -> e.getFname().toUpperCase().charAt(0) == Character.toUpperCase(letter));
+        return new ResponseEntity<>(rtnEmps, HttpStatus.OK);
     }
 }
