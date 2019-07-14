@@ -86,4 +86,9 @@ public class Employee {
     }
     // end of - GETTERS & SETTERS
     // *********************************
+    
+    @Override
+    public String toString() {
+        return "Employee{" + "id=" + id + ", fname='" + fname + '\'' + ", lname='" + lname + '\'' + ", salary=" + salary + ", has401k=" + has401k + ", companyID=" + companyID + ", healthPlanID=" + healthPlanID + '}';
+    }
 }
